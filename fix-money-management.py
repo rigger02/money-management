@@ -97,7 +97,6 @@ def load_data():
 # Main program
 def main():
     while True:
-        print("\n" + "="*30)
         print("\nManajemen Keuangan Pribadi")
         print("1. Tambah Transaksi")
         print("2. Tampilkan Semua Transaksi")
@@ -120,6 +119,9 @@ def main():
             add_transaction(date, type, amount, category, description)
 
         elif choice == '2':
+            print("\n")
+            print("Daftar Transaksi:")
+            print("Index | Tanggal | Tipe | Jumlah | Kategori | Deskripsi")
             for i, t in enumerate(read_transactions()):
                 print(f"{i}. {t['date']} | {t['type']} | {t['amount']} | {t['category']} | {t['description']}")
 
