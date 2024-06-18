@@ -127,15 +127,23 @@ def main():
 
         elif choice == '3':
             index = int(input("Index transaksi yang akan diperbarui: "))
-            date = input("Tanggal (YYYY-MM-DD): ")
-            type = input("Tipe (income/expense): ")
-            amount = input("Jumlah: ")
-            category = input("Kategori: ")
-            description = input("Deskripsi: ")
+            if index < 0 or index >= len(transactions):
+                print("Index tidak valid")
+                continue
+            transaction = transactions[index]
+            print(f"Data lama: {transaction['date']} | {transaction['type']} | {transaction['amount']} | {transaction['category']} | {transaction['description']}")
+            date = input(f"Tanggal (YYYY-MM-DD) [{transaction['date']}]: ") or transaction['date']
+            type = input(f"Tipe (income/expense) [{transaction['type']}]: ") or transaction['type']
+            amount = input(f"Jumlah [{transaction['amount']}]: ") or transaction['amount']
+            category = input(f"Kategori [{transaction['category']}]: ") or transaction['category']
+            description = input(f"Deskripsi [{transaction['description']}]: ") or transaction['description']
             update_transaction(index, date, type, amount, category, description)
 
         elif choice == '4':
             index = int(input("Index transaksi yang akan dihapus: "))
+            if index < 0 or index >= len(transactions):
+                print("Index tidak valid")
+                continue
             delete_transaction(index)
 
         elif choice == '5':
@@ -161,7 +169,7 @@ def main():
             if input("Apakah Anda ingin menyimpan data terlebih dahulu? (y/n): ") == 'y':
                 save_data()
             else:
-                print("terimakasih, sampai bertemu lagi")
+                print("Terimakasih, sampai bertemu lagi")
                 break
 
         else:
